@@ -1,0 +1,71 @@
+{
+	"name": "wp-pay-gateways/digiwallet",
+	"description": "DigiWallet driver for the WordPress payment processing library.",
+	"keywords": ["wordpress", "wp", "pay", "digiwallet", "targetpay", "gateway", "pronamic"],
+	"homepage": "http://www.wp-pay.org/gateways/digiwallet/",
+	"license": "GPL-3.0-or-later" ,
+	"authors": [
+		{
+			"name": "Pronamic",
+			"email": "info@pronamic.eu",
+			"homepage": "http://www.pronamic.eu/",
+			"role": "Company"
+		},
+		{
+			"name": "Remco Tolsma",
+			"email": "info@remcotolsma.nl",
+			"homepage": "http://www.remcotolsma.nl/",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "support@wp-pay.org",
+		"issues": "https://github.com/wp-pay-gateways/digiwallet/issues",
+		"source": "https://github.com/wp-pay-gateways/digiwallet"
+	},
+	"autoload": {
+		"psr-4": {
+			"Pronamic\\WordPress\\Pay\\Gateways\\DigiWallet\\": "src/"
+		}
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"require": {
+		"php": ">=5.6.20",
+		"justinrainbow/json-schema": "^5.2",
+		"pronamic/wp-http": "^1.0",
+		"wp-pay/core": "^2.6"
+	},
+	"require-dev": {
+		"bamarni/composer-bin-plugin": "^1.4",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+		"overtrue/phplint": "^2.2",
+		"php-coveralls/php-coveralls": "^2.4",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"phpmd/phpmd": "^2.9",
+		"phpunit/phpunit": "^5.7 || ^6.0",
+		"roots/wordpress": "^5.6",
+		"sirbrillig/phpcs-variable-analysis": "^2.9",
+		"slevomat/coding-standard": "^6.4",
+		"squizlabs/php_codesniffer": "^3.5",
+		"wp-coding-standards/wpcs": "^2.3",
+		"wp-phpunit/wp-phpunit": "^5.6"
+	},
+	"scripts": {
+		"coveralls": "vendor/bin/php-coveralls -v",
+		"phpcbf": "vendor/bin/phpcbf",
+		"phpcs": "vendor/bin/phpcs -s -v",
+		"phplint": "vendor/bin/phplint",
+		"phpmd": "vendor/bin/phpmd src,tests text phpmd.ruleset.xml --suffixes php",
+		"phpstan": "vendor/bin/phpstan analyse --memory-limit=-1",
+		"phpunit": "vendor/bin/phpunit",
+		"post-install-cmd": "echo 'Optionally run: composer bin all install'",
+		"post-update-cmd": "echo 'Optionally run: composer bin all update'",
+		"psalm": "vendor/bin/psalm",
+		"build-docs": [
+			"vendor/bin/wp-documentor parse src --format=markdown --relative=docs > docs/hooks.md"
+		]
+	}
+}

@@ -1,23 +1,24 @@
-# ignore everything in the root except the "wp-content" directory.
-!wp-content/
+# Build
+/build/
 
-# ignore everything in the "wp-content" directory, except:
-# "mu-plugins", "plugins", "themes" directory
-wp-content/*
-!wp-content/mu-plugins/
-!wp-content/plugins/
-!wp-content/themes/
+# Composer
+/composer.lock
+/vendor/
 
-# ignore these plugins
-wp-content/plugins/hello.php
+# Composer bin plugin
+/vendor-bin/**/vendor
 
-# ignore specific themes
-wp-content/themes/twenty*/
+# Eclipse
+/.buildpath
+/.project
+/.settings
 
-# ignore node dependency directories
-node_modules/
+# Node.js
+/package-lock.json
+/node_modules/
 
-# ignore log files and databases
-*.log
-*.sql
-*.sqlite
+# PHP Coding Standards Fixer
+/.php_cs.cache
+
+# WordPress
+/wordpress/

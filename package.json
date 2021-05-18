@@ -1,0 +1,42 @@
+{
+  "name": "digiwallet",
+  "version": "1.0.0",
+  "description": "DigiWallet driver for the WordPress payment processing library.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wp-pay-gateways/digiwallet"
+  },
+  "keywords": [
+    "wordpress",
+    "wp",
+    "pay",
+    "digiwallet",
+    "targetpay",
+    "gateway",
+    "pronamic"
+  ],
+  "author": {
+    "name": "Pronamic",
+    "email": "info@pronamic.nl",
+    "url": "http://www.pronamic.nl/"
+  },
+  "contributors": [
+    {
+      "name": "Remco Tolsma",
+      "email": "info@remcotolsma.nl",
+      "url": "http://www.remcotolsma.nl/"
+    }
+  ],
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/wp-pay-gateways/digiwallet/issues"
+  },
+  "homepage": "http://www.wp-pay.org/gateways/digiwallet/",
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-plugin-json": "^2.1.2"
+  },
+  "scripts": {
+    "eslint": "eslint . --ext .json --ext .js"
+  }
+}
