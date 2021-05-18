@@ -16,7 +16,7 @@ use Pronamic\WordPress\Pay\AbstractGatewayIntegration;
  * Integration
  *
  * @author  Remco Tolsma
- * @version 1.1.2
+ * @version 1.0.0
  * @since   1.0.0
  */
 class Integration extends AbstractGatewayIntegration {
@@ -102,10 +102,17 @@ class Integration extends AbstractGatewayIntegration {
 	 * @return Config
 	 */
 	public function get_config( $post_id ) {
-		$mode = $this->get_meta( $post_id, 'mode' );
-		$rtlo = $this->get_meta( $post_id, 'rtlo' );
+		$rtlo = $this->get_meta( $post_id, 'digiwallet_rtlo' );
 
-		return new Config( $mode, $rtlo );
+		$config = new Config( $rtlo );
+
+		$mode = $this->get_meta( $post_id, 'mode' );	
+
+		if ( 'test' === $mode ) {
+			$config->set_test( true );
+		}
+
+		return $config;
 	}
 
 	/**
