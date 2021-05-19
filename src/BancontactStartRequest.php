@@ -31,6 +31,6 @@ class BancontactStartRequest extends StartRequest {
 	public function __construct( $rtlo, $amount, $description, $return_url, $user_ip ) {
 		parent::__construct( '2', $rtlo, $amount, $description, $return_url );
 
-		$this->user_ip = $user_ip;
+		$this->set_user_ip( $user_ip );
 	}
 }

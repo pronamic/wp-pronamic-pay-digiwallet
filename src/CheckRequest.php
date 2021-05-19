@@ -20,6 +20,13 @@ namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
  */
 class CheckRequest extends Request {
 	/**
+	 * Transaction number.
+	 *
+	 * @var string
+	 */
+	private $transaction_number;
+
+	/**
 	 * Construct config object.
 	 *
 	 * @param string $rtlo RTLO.
@@ -34,7 +41,7 @@ class CheckRequest extends Request {
 	/**
 	 * Get parameters.
 	 *
-	 * @return array<string>
+	 * @return array<string, string>
 	 */
 	public function get_parameters() {
 		$parameters = parent::get_parameters();

@@ -20,6 +20,41 @@ namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
  */
 abstract class StartRequest extends Request {
 	/**
+	 * Amount.
+	 *
+	 * @var string
+	 */
+	private $amount;
+
+	/**
+	 * Description.
+	 *
+	 * @var string
+	 */
+	private $description;
+
+	/**
+	 * Return URL.
+	 *
+	 * @var string
+	 */
+	private $return_url;
+
+	/**
+	 * Report URL.
+	 *
+	 * @var string|null
+	 */
+	private $report_url;
+
+	/**
+	 * User IP.
+	 *
+	 * @var string|null
+	 */
+	private $user_ip;
+
+	/**
 	 * Construct config object.
 	 *
 	 * @param string $version     Version.
@@ -40,9 +75,20 @@ abstract class StartRequest extends Request {
 	 * Set report URL.
 	 *
 	 * @param string $url URL.
+	 * @return void
 	 */
 	public function set_report_url( $url ) {
 		$this->report_url = $url;
+	}
+
+	/**
+	 * Set user IP.
+	 *
+	 * @param string $user_ip User IP.
+	 * @return void
+	 */
+	public function set_user_ip( $user_ip ) {
+		$this->user_ip = $user_ip;
 	}
 
 	/**

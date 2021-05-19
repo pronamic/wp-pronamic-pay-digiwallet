@@ -41,6 +41,7 @@ class Config extends GatewayConfig implements \JsonSerializable {
 	 */
 	public function __construct( $rtlo ) {
 		$this->rtlo = $rtlo;
+		$this->mode = '';
 	}
 
 	/**
@@ -56,6 +57,7 @@ class Config extends GatewayConfig implements \JsonSerializable {
 	 * Set test.
 	 *
 	 * @param bool $test Test.
+	 * @return void
 	 */
 	public function set_test( $test ) {
 		$this->test = $test;

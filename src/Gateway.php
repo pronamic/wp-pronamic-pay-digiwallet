@@ -67,14 +67,18 @@ class Gateway extends Core_Gateway {
 	 * @see Plugin::start()
 	 */
 	public function start( Payment $payment ) {
+		if ( ! $this->config instanceof Config ) {
+			throw new \Exception( 'No DigiWallet configuration.' );
+		}
+
 		switch ( $payment->get_method() ) {
 			case PaymentMethods::BANCONTACT:
 				$url = 'https://transaction.digiwallet.nl/mrcash/start';
 
 				$request = new BancontactStartRequest(
 					$this->config->get_rtlo(),
-					\strval( $payment->get_total_amount()->get_cents() ),
-					$payment->get_description(),
+					\strval( $payment->get_total_amount()->get_minor_units() ),
+					\strval( $payment->get_description() ),
 					$payment->get_return_url(),
 					'127.0.0.1'
 				);
@@ -85,8 +89,8 @@ class Gateway extends Core_Gateway {
 
 				$request = new IDealStartRequest(
 					$this->config->get_rtlo(),
-					\strval( $payment->get_total_amount()->get_cents() ),
-					$payment->get_description(),
+					\strval( $payment->get_total_amount()->get_minor_units() ),
+					\strval( $payment->get_description() ),
 					$payment->get_return_url()
 				);
 
@@ -95,7 +99,7 @@ class Gateway extends Core_Gateway {
 				throw new \Exception(
 					\sprintf(
 						'Unsupported payment method: %s.',
-						$payment->get_method()
+						\strval( $payment->get_method() )
 					)
 				);
 		}
@@ -112,9 +116,9 @@ class Gateway extends Core_Gateway {
 
 		$body = $response->body();
 
-		$result_code = new ResultCode( \strtok( $body, ' ' ) );
+		$result_code = new ResultCode( \strval( \strtok( $body, ' ' ) ) );
 
-		$message = \strtok( '' );
+		$message = \strval( \strtok( '' ) );
 
 		if ( $result_code->is_error() ) {
 			throw new Error( $result_code, $message );
@@ -122,8 +126,8 @@ class Gateway extends Core_Gateway {
 
 		$start_response = new StartResponse(
 			$result_code,
-			\strtok( $message, '|' ),
-			\strtok( '' )
+			\strval( \strtok( $message, '|' ) ),
+			\strval( \strtok( '' ) )
 		);
 
 		$payment->set_transaction_id( $start_response->get_transaction_number() );
@@ -139,6 +143,16 @@ class Gateway extends Core_Gateway {
 	 * @throws Error Throws error on unknown internal error.
 	 */
 	public function update_status( Payment $payment ) {
+		if ( ! $this->config instanceof Config ) {
+			throw new \Exception( 'No DigiWallet configuration.' );
+		}
+
+		$transaction_id = $payment->get_transaction_id();
+
+		if ( null === $transaction_id ) {
+			throw new \Exception( 'No transaction ID.' );
+		}
+
 		switch ( $payment->get_method() ) {
 			/**
 			 * Payment method Bancontact.
@@ -162,14 +176,14 @@ class Gateway extends Core_Gateway {
 				throw new \Exception(
 					\sprintf(
 						'Unsupported payment method: %s.',
-						$payment->get_method()
+						\strval( $payment->get_method() )
 					)
 				);
 		}
 
 		$request = new CheckRequest(
 			$this->config->get_rtlo(),
-			$payment->get_transaction_id()
+			$transaction_id
 		);
 
 		$response = \Pronamic\WordPress\Http\Facades\Http::post(
@@ -181,9 +195,9 @@ class Gateway extends Core_Gateway {
 
 		$body = $response->body();
 
-		$result_code = new ResultCode( \strtok( $body, ' ' ) );
+		$result_code = new ResultCode( \strval( \strtok( $body, ' ' ) ) );
 
-		$message = \strtok( '' );
+		$message = \strval( \strtok( '' ) );
 
 		switch ( $result_code ) {
 			case '000000':
