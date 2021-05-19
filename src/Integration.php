@@ -58,6 +58,11 @@ class Integration extends AbstractGatewayIntegration {
 	 */
 	public function setup() {
 		\add_filter( 'pronamic_gateway_configuration_display_value_' . $this->get_id(), array( $this, 'gateway_configuration_display_value' ), 10, 2 );
+
+		// Report controller.
+		$report_controller = new ReportController();
+
+		$report_controller->setup();
 	}
 
 	/**

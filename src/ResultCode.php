@@ -61,4 +61,13 @@ class ResultCode {
 	public function is_error() {
 		return ! $this->is_ok();
 	}
+
+	/**
+	 * String.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return $this->code;
+	}
 }

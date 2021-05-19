@@ -22,13 +22,6 @@ use Pronamic\WordPress\Pay\Core\GatewayConfig;
  */
 abstract class StartRequest extends Request {
 	/**
-	 * RTLO.
-	 *
-	 * @var string
-	 */
-	private $rtlo;
-
-	/**
 	 * Construct config object.
 	 *
 	 * @param string $rtlo RTLO.
@@ -39,6 +32,10 @@ abstract class StartRequest extends Request {
 		$this->amount      = $amount;
 		$this->description = $description;
 		$this->return_url  = $return_url;
+	}
+
+	public function set_report_url( $url ) {
+		$this->report_url = $url;
 	}
 
 	/**
@@ -55,6 +52,10 @@ abstract class StartRequest extends Request {
 
 		if ( null !== $this->user_ip ) {
 			$parameters['userip'] = $this->user_ip;			
+		}
+
+		if ( null !== $this->report_url ) {
+			$parameters['reporturl'] = $this->report_url;			
 		}
 
 		return $parameters;

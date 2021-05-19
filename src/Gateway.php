@@ -13,6 +13,7 @@ namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 use Pronamic\WordPress\Pay\Core\Gateway as Core_Gateway;
 use Pronamic\WordPress\Pay\Core\PaymentMethods;
 use Pronamic\WordPress\Pay\Payments\Payment;
+use Pronamic\WordPress\Pay\Payments\PaymentStatus;
 
 /**
  * Gateway
@@ -37,7 +38,7 @@ class Gateway extends Core_Gateway {
 	public function __construct( Config $config ) {
 		parent::__construct( $config );
 
-
+		$this->set_method( self::METHOD_HTTP_REDIRECT );
 	}
 
 	/**
@@ -72,8 +73,6 @@ class Gateway extends Core_Gateway {
 	 * @see Plugin::start()
 	 */
 	public function start( Payment $payment ) {
-		$test = $payment->get_method();
-
 		switch ( $payment->get_method() ) {
 			case PaymentMethods::BANCONTACT:
 				$url = 'https://transaction.digiwallet.nl/mrcash/start';
@@ -108,6 +107,7 @@ class Gateway extends Core_Gateway {
 		}
 
 		$request->set_test( $this->config->is_test() );
+		$request->set_report_url( \rest_url( Integration::REST_ROUTE_NAMESPACE . '/report' ) );
 
 		$response = \Pronamic\WordPress\Http\Facades\Http::post(
 			$url,
@@ -143,6 +143,98 @@ class Gateway extends Core_Gateway {
 	 * @return void
 	 */
 	public function update_status( Payment $payment ) {
-		
+		switch ( $payment->get_method() ) {
+			/**
+			 * Bancontact.
+			 *
+			 * @link https://www.digiwallet.nl/en/documentation/paymethods/bancontact#checkapi
+			 */
+			case PaymentMethods::BANCONTACT:
+				$url = 'https://transaction.digiwallet.nl/mrcash/check';
+
+				break;
+			/**
+			 * iDEAL.
+			 *
+			 * @link https://www.digiwallet.nl/en/documentation/ideal#checkapi
+			 */
+			case PaymentMethods::IDEAL:
+				$url = 'https://transaction.digiwallet.nl/ideal/check';
+
+				break;
+			default:
+				throw new \Exception(
+					\sprintf(
+						'Unsupported payment method: %s.',
+						$payment->get_method()
+					)
+				);
+		}
+
+		$request = new CheckRequest(
+			$this->config->get_rtlo(),
+			$payment->get_transaction_id()
+		);
+
+		$response = \Pronamic\WordPress\Http\Facades\Http::post(
+			$url,
+			array(
+				'body' => $request->get_parameters(),
+			)
+		);
+
+		$body = $response->body();
+
+		$result_code = new ResultCode( \strtok( $body, ' ' ) );
+
+		$message = \strtok( '' );
+
+		switch ( $result_code ) {
+			case '000000':
+				$payment->set_status( PaymentStatus::SUCCESS );
+
+				break;
+			case 'DW_SE_0020':
+				// Transaction has not been completed, try again later.
+				$payment->set_status( PaymentStatus::OPEN );
+
+				break;
+			case 'DW_SE_0021':
+				// Transaction has been cancelled.
+				$payment->set_status( PaymentStatus::CANCELLED );
+
+				break;
+			case 'DW_SE_0022':
+				// Transaction has expired.
+				$payment->set_status( PaymentStatus::EXPIRED );
+
+				break;
+			case 'DW_SE_0023':
+				// Transaction could not be processed.
+				$payment->set_status( PaymentStatus::FAILURE );
+
+				break;
+			case 'DW_SE_0028':
+				// Transaction already checked at `datetime`.
+
+				break;
+			case 'DW_XE_0003':
+				// Validation failed, details: `JSON-encoded array`.
+				$payment->set_status( PaymentStatus::FAILURE );
+
+				break;
+			case 'DW_IE_0002':
+				// Maximum retries at acquirer bank exceeded for primary and fallback.
+				$payment->set_status( PaymentStatus::FAILURE );
+
+				break;
+			case 'DW_IE_0006':
+				// System is busy, please retry later.
+
+				break;
+			case 'DW_IE_0001':
+				// Unknown internal error.
+				throw new Error( $result_code, $message );
+		}
 	}
 }

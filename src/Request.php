@@ -23,7 +23,7 @@ abstract class Request {
 	/**
 	 * Version.
 	 *
-	 * @var string
+	 * @var string|null
 	 */
 	private $version;
 
@@ -65,10 +65,15 @@ abstract class Request {
 	 * @return array
 	 */
 	public function get_parameters() {
-		return array(
-			'ver'  => $this->version,
-			'rtlo' => $this->rtlo,
-			'test' => $this->test ? '1' : '0',
-		);
+		$parameters = array();
+
+		if ( null !== $this->version ) {
+			$parameters['ver'] = $this->version;
+		}
+
+		$parameters['rtlo'] = $this->rtlo;
+		$parameters['test'] = $this->test ? '1' : '0';
+
+		return $parameters;
 	}
 }
