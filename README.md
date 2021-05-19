@@ -7,7 +7,7 @@
 <h1 align="center">WordPress Pay » Gateway » DigiWallet</h3>
 
 <p align="center">
-	DigiWallet driver for the WordPress payment processing library.
+	DigiWallet (formerly TargetPay) driver for the WordPress payment processing library.
 </p>
 
 ## Links
