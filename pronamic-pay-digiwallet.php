@@ -27,7 +27,7 @@
 
 add_filter(
 	'pronamic_pay_gateways',
-	function( $gateways ) {
+	static function( $gateways ) {
 		$gateways[] = new \Pronamic\WordPress\Pay\Gateways\DigiWallet\Integration();
 
 		return $gateways;
