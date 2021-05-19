@@ -47,6 +47,10 @@ class ReportController {
 						'description' => \__( 'order number', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
+					'amount'     => array(
+						'description' => \__( 'amount in eurocents', 'pronamic_ideal' ),
+						'type'        => 'string',
+					),
 					'idealtrxid' => array(
 						'description' => \__( 'iDEAL order number', 'pronamic_ideal' ),
 						'type'        => 'string',
