@@ -22,7 +22,11 @@ abstract class StartRequest extends Request {
 	/**
 	 * Construct config object.
 	 *
-	 * @param string $rtlo RTLO.
+	 * @param string $version     Version.
+	 * @param string $rtlo        RTLO.
+	 * @param string $amount      Amount.
+	 * @param string $description Description.
+	 * @param string $return_url  Return URL.
 	 */
 	public function __construct( $version, $rtlo, $amount, $description, $return_url ) {
 		parent::__construct( $version, $rtlo );
@@ -32,6 +36,11 @@ abstract class StartRequest extends Request {
 		$this->return_url  = $return_url;
 	}
 
+	/**
+	 * Set report URL.
+	 *
+	 * @param string $url URL.
+	 */
 	public function set_report_url( $url ) {
 		$this->report_url = $url;
 	}
@@ -39,7 +48,7 @@ abstract class StartRequest extends Request {
 	/**
 	 * Get parameters.
 	 *
-	 * @return array
+	 * @return array<string, string>
 	 */
 	public function get_parameters() {
 		$parameters = parent::get_parameters();

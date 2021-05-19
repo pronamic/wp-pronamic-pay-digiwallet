@@ -29,11 +29,20 @@ class Error extends \Exception {
 	 * Construct error
 	 *
 	 * @param ResultCode $result_code Result Code.
-	 * @param string     $rtlo RTLO.
+	 * @param string     $message     Message.
 	 */
 	public function __construct( $result_code, $message ) {
 		parent::__construct( $message );
 
 		$this->result_code = $result_code;
+	}
+
+	/**
+	 * Get result code.
+	 *
+	 * @return ResultCode
+	 */
+	public function get_result_code() {
+		return $this->result_code;
 	}
 }

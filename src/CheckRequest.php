@@ -23,6 +23,7 @@ class CheckRequest extends Request {
 	 * Construct config object.
 	 *
 	 * @param string $rtlo RTLO.
+	 * @param string $transaction_number Transaction number.
 	 */
 	public function __construct( $rtlo, $transaction_number ) {
 		parent::__construct( null, $rtlo );
@@ -33,7 +34,7 @@ class CheckRequest extends Request {
 	/**
 	 * Get parameters.
 	 *
-	 * @return array
+	 * @return array<string>
 	 */
 	public function get_parameters() {
 		$parameters = parent::get_parameters();

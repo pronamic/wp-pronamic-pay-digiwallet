@@ -80,6 +80,13 @@ class ReportController {
 	 * @throws \Exception Throws exception when something unexpected happens ;-).
 	 */
 	public function rest_api_digiwallet_report( \WP_REST_Request $request ) {
-		return true;
+		$transaction_id = $request->get_param( 'trxid' );
+
+		$rtlo = $request->get_param( 'rtlo' );
+
+		return (object) array(
+			'transaction_id' => $transaction_id,
+			'rtlo'           => $rtlo,
+		);
 	}
 }

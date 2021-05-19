@@ -42,8 +42,8 @@ abstract class Request {
 	/**
 	 * Construct config object.
 	 *
-	 * @param string $mode Mode.
-	 * @param string $rtlo RTLO.
+	 * @param string $version Version.
+	 * @param string $rtlo    RTLO.
 	 */
 	public function __construct( $version, $rtlo ) {
 		$this->version = $version;
@@ -52,6 +52,8 @@ abstract class Request {
 
 	/**
 	 * Set test.
+	 *
+	 * @param bool $test Test.
 	 */
 	public function set_test( $test ) {
 		$this->test = $test;
@@ -60,7 +62,7 @@ abstract class Request {
 	/**
 	 * Get parameters.
 	 *
-	 * @return array
+	 * @return array<string, string>
 	 */
 	public function get_parameters() {
 		$parameters = array();

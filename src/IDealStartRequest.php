@@ -22,7 +22,10 @@ class IDealStartRequest extends StartRequest {
 	/**
 	 * Construct start iDEAL request
 	 *
-	 * @param string $rtlo RTLO.
+	 * @param string $rtlo        RTLO.
+	 * @param string $amount      Amount.
+	 * @param string $description Description.
+	 * @param string $return_url  Return URL.
 	 */
 	public function __construct( $rtlo, $amount, $description, $return_url ) {
 		parent::__construct( '4', $rtlo, $amount, $description, $return_url );

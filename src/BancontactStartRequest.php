@@ -20,18 +20,15 @@ namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
  */
 class BancontactStartRequest extends StartRequest {
 	/**
-	 * RTLO.
-	 *
-	 * @var string
-	 */
-	private $rtlo;
-
-	/**
 	 * Construct config object.
 	 *
-	 * @param string $rtlo RTLO.
+	 * @param string $rtlo        RTLO.
+	 * @param string $amount      Amount.
+	 * @param string $description Description.
+	 * @param string $return_url  Return URL.
+	 * @param string $user_ip     User IP.
 	 */
-	public function __construct( $version, $rtlo, $amount, $description, $return_url, $user_ip ) {
+	public function __construct( $rtlo, $amount, $description, $return_url, $user_ip ) {
 		parent::__construct( '2', $rtlo, $amount, $description, $return_url );
 
 		$this->user_ip = $user_ip;

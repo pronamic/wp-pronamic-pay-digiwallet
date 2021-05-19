@@ -80,7 +80,9 @@ class Integration extends AbstractGatewayIntegration {
 	public function gateway_configuration_display_value( $display_value, $post_id ) {
 		$config = $this->get_config( $post_id );
 
-		return $config->get_rtlo();
+		$display_value = $config->get_rtlo();
+
+		return $display_value;
 	}
 
 	/**

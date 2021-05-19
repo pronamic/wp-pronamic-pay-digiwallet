@@ -24,13 +24,6 @@ use Pronamic\WordPress\Pay\Payments\PaymentStatus;
  */
 class Gateway extends Core_Gateway {
 	/**
-	 * Client.
-	 *
-	 * @var Client
-	 */
-	private $client;
-
-	/**
 	 * Constructs and initializes an PayPal gateway.
 	 *
 	 * @param Config $config Config.
@@ -69,7 +62,8 @@ class Gateway extends Core_Gateway {
 	 *
 	 * @param Payment $payment Payment.
 	 * @return void
-	 * @throws \InvalidArgumentException Throws exception if payment ID or currency is empty.
+	 * @throws \Exception Throws eception on remote request issues.
+	 * @throws Error Throws error when DigiWallet returns an error.
 	 * @see Plugin::start()
 	 */
 	public function start( Payment $payment ) {
@@ -141,11 +135,13 @@ class Gateway extends Core_Gateway {
 	 *
 	 * @param Payment $payment Payment.
 	 * @return void
+	 * @throws \Exception Throws eception on remote request issues.
+	 * @throws Error Throws error on unknown internal error.
 	 */
 	public function update_status( Payment $payment ) {
 		switch ( $payment->get_method() ) {
 			/**
-			 * Bancontact.
+			 * Payment method Bancontact.
 			 *
 			 * @link https://www.digiwallet.nl/en/documentation/paymethods/bancontact#checkapi
 			 */
@@ -154,7 +150,7 @@ class Gateway extends Core_Gateway {
 
 				break;
 			/**
-			 * iDEAL.
+			 * Payment method iDEAL.
 			 *
 			 * @link https://www.digiwallet.nl/en/documentation/ideal#checkapi
 			 */
@@ -219,6 +215,7 @@ class Gateway extends Core_Gateway {
 
 				break;
 			case 'DW_XE_0003':
+				// phpcs:ignore Squiz.PHP.CommentedOutCode.Found
 				// Validation failed, details: `JSON-encoded array`.
 				$payment->set_status( PaymentStatus::FAILURE );
 

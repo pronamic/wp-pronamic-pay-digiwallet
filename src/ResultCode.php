@@ -36,7 +36,7 @@ class ResultCode {
 	/**
 	 * Construct config object.
 	 *
-	 * @param string $rtlo RTLO.
+	 * @param string $code Code.
 	 */
 	public function __construct( $code ) {
 		$this->code = $code;

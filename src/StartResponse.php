@@ -43,12 +43,23 @@ class StartResponse {
 	/**
 	 * Construct config object.
 	 *
-	 * @param string $rtlo RTLO.
+	 * @param ResultCode $result_code        Result code.
+	 * @param string     $transaction_number Transaction number.
+	 * @param string     $bank_url           Bank URL.
 	 */
-	public function __construct( $result_code, $transaction_number, $bank_url ) {
+	public function __construct( ResultCode $result_code, $transaction_number, $bank_url ) {
 		$this->result_code        = $result_code;
 		$this->transaction_number = $transaction_number;
 		$this->bank_url           = $bank_url;
+	}
+
+	/**
+	 * Get result code.
+	 *
+	 * @return ResultCode
+	 */
+	public function get_result_code() {
+		return $this->result_code;
 	}
 
 	/**
