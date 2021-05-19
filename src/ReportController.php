@@ -10,9 +10,6 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
-use Pronamic\WordPress\Pay\GatewayPostType;
-use Pronamic\WordPress\Pay\Plugin;
-
 /**
  * Report controller
  *
@@ -46,28 +43,28 @@ class ReportController {
 				'callback'            => array( $this, 'rest_api_digiwallet_report' ),
 				'permission_callback' => '__return_true',
 				'args'                => array(
-					'trxid' => array(
-						'description' => __( 'order number', 'pronamic_ideal' ),
+					'trxid'      => array(
+						'description' => \__( 'order number', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
 					'idealtrxid' => array(
-						'description' => __( 'iDEAL order number', 'pronamic_ideal' ),
+						'description' => \__( 'iDEAL order number', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
-					'rtlo' => array(
-						'description' => __( 'shop ID (layoutcode)', 'pronamic_ideal' ),
+					'rtlo'       => array(
+						'description' => \__( 'shop ID (layoutcode)', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
-					'status' => array(
-						'description' => __( 'status-code of the payment, see Check API', 'pronamic_ideal' ),
+					'status'     => array(
+						'description' => \__( 'status-code of the payment, see Check API', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
-					'cname' => array(
-						'description' => __( 'customer\'s name, if payment was successful', 'pronamic_ideal' ),
+					'cname'      => array(
+						'description' => \__( 'customer\'s name, if payment was successful', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
-					'cbank' => array(
-						'description' => __( 'customer\'s IBAN number, if payment was successful', 'pronamic_ideal' ),
+					'cbank'      => array(
+						'description' => \__( 'customer\'s IBAN number, if payment was successful', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
 				),

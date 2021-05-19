@@ -10,8 +10,6 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
-use Pronamic\WordPress\Pay\Core\GatewayConfig;
-
 /**
  * Start iDEAL request
  *

@@ -57,7 +57,12 @@ class Integration extends AbstractGatewayIntegration {
 	 * Setup.
 	 */
 	public function setup() {
-		\add_filter( 'pronamic_gateway_configuration_display_value_' . $this->get_id(), array( $this, 'gateway_configuration_display_value' ), 10, 2 );
+		\add_filter(
+			'pronamic_gateway_configuration_display_value_' . $this->get_id(),
+			array( $this, 'gateway_configuration_display_value' ),
+			10,
+			2
+		);
 
 		// Report controller.
 		$report_controller = new ReportController();
@@ -111,7 +116,7 @@ class Integration extends AbstractGatewayIntegration {
 
 		$config = new Config( $rtlo );
 
-		$mode = $this->get_meta( $post_id, 'mode' );	
+		$mode = $this->get_meta( $post_id, 'mode' );
 
 		if ( 'test' === $mode ) {
 			$config->set_test( true );

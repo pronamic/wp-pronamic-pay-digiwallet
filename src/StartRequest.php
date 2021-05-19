@@ -10,8 +10,6 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
-use Pronamic\WordPress\Pay\Core\GatewayConfig;
-
 /**
  * Start request
  *
@@ -51,11 +49,11 @@ abstract class StartRequest extends Request {
 		$parameters['returnurl']   = $this->return_url;
 
 		if ( null !== $this->user_ip ) {
-			$parameters['userip'] = $this->user_ip;			
+			$parameters['userip'] = $this->user_ip;
 		}
 
 		if ( null !== $this->report_url ) {
-			$parameters['reporturl'] = $this->report_url;			
+			$parameters['reporturl'] = $this->report_url;
 		}
 
 		return $parameters;

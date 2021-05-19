@@ -10,8 +10,6 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
-use Pronamic\WordPress\Pay\Core\GatewayConfig;
-
 /**
  * Error
  *
@@ -31,7 +29,7 @@ class Error extends \Exception {
 	 * Construct error
 	 *
 	 * @param ResultCode $result_code Result Code.
-	 * @param string $rtlo RTLO.
+	 * @param string     $rtlo RTLO.
 	 */
 	public function __construct( $result_code, $message ) {
 		parent::__construct( $message );

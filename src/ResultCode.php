@@ -10,8 +10,6 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
-use Pronamic\WordPress\Pay\Core\GatewayConfig;
-
 /**
  * Result Code
  *
@@ -50,7 +48,7 @@ class ResultCode {
 	 * @return bool True if OK, false otherwise.
 	 */
 	public function is_ok() {
-		return ( self::OK === $this->code );
+		return self::OK === $this->code;
 	}
 
 	/**
