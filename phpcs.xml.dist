@@ -72,26 +72,12 @@
 		<exclude name="SlevomatCodingStandard.Whitespaces.DuplicateSpaces.DuplicateSpaces" />
 	</rule>
 
-	<rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedExceptions">
-		<properties>
-			<property name="ignoredNames" type="array">
-				<element value="WP_Error" />
-			</property>
-		</properties>
-	</rule>
-
 	<rule ref="WordPress">
 		<exclude name="WordPress.DB.SlowDBQuery.slow_db_query_meta_key" />
 		<exclude name="WordPress.DB.SlowDBQuery.slow_db_query_meta_query" />
 
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
-
-		<exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase" />
-	</rule>
-
-	<rule ref="WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_putenv">
-		<exclude-pattern>tests/bootstrap.php</exclude-pattern>
 	</rule>
 
 	<rule ref="VariableAnalysis" />
