@@ -10,6 +10,8 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
+use Pronamic\WordPress\Pay\Plugin;
+
 /**
  * Report controller
  *
@@ -71,6 +73,10 @@ class ReportController {
 						'description' => \__( 'customer\'s IBAN number, if payment was successful', 'pronamic_ideal' ),
 						'type'        => 'string',
 					),
+					'cbic'       => array(
+						'description' => \__( 'customer\'s BIC number, if payment was successful', 'pronamic_ideal' ),
+						'type'        => 'string',
+					),
 				),
 			)
 		);
@@ -86,6 +92,57 @@ class ReportController {
 	public function rest_api_digiwallet_report( \WP_REST_Request $request ) {
 		$transaction_id = $request->get_param( 'trxid' );
 
+		if ( empty( $transaction_id ) ) {
+			return new \WP_Error(
+				'pronamic_pay_digiwallet_transaction_id_empty',
+				'Failed to process report request due to empty transaction ID.',
+				array( 'status' => 500 )
+			);
+		}
+
+		/**
+		 * Search for payment.
+		 */
+		$payment = \get_pronamic_payment_by_transaction_id( $transaction_id );
+
+		if ( null === $payment ) {
+			return new \WP_Error(
+				'pronamic_pay_digiwallet_payment_not_found',
+				\sprintf(
+					'Could not find payment with transaction ID: %s.',
+					$transaction_id
+				),
+				array( 'status' => 500 )
+			);
+		}
+
+		/**
+		 * Add note.
+		 */
+		$note = \sprintf(
+			/* translators: %s: payment provider name */
+			\__( 'Report URL requested by %s.', 'pronamic_ideal' ),
+			\__( 'DigiWallet', 'pronamic_ideal' )
+		);
+
+		$payment->add_note( $note );
+
+		/**
+		 * Update payment.
+		 *
+		 * To secure that the status return is coming from DigiWallet you
+		 * should always call to Check API. The output of the report URL
+		 * will not be visible to the customer. The customer is redirected
+		 * to the return- or cancel URL.
+		 *
+		 * @link https://www.digiwallet.nl/en/documentation/ideal#startapi
+		 * @link https://www.digiwallet.nl/en/documentation/ideal#checkapi
+		 */
+		Plugin::update_payment( $payment, false );
+
+		/**
+		 * Return response.
+		 */
 		$rtlo = $request->get_param( 'rtlo' );
 
 		return (object) array(
