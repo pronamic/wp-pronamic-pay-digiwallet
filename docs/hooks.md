@@ -5,7 +5,21 @@
 
 ## Actions
 
-*This project does not contain any WordPress actions.*
+### `pronamic_pay_webhook_log_payment`
+
+*Webhook log payment.*
+
+The `pronamic_pay_webhook_log_payment` action is triggered so the
+`wp-pay/core` library can hook into this and register the webhook
+call.
+
+**Arguments**
+
+Argument | Type | Description
+-------- | ---- | -----------
+`$payment` | `\Pronamic\WordPress\Pay\Gateways\DigiWallet\Payment` | Payment to log.
+
+Source: [src/ReportController.php](../src/ReportController.php), [line 119](../src/ReportController.php#L119-L128)
 
 ## Filters
 

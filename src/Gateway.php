@@ -32,6 +32,57 @@ class Gateway extends Core_Gateway {
 		parent::__construct( $config );
 
 		$this->set_method( self::METHOD_HTTP_REDIRECT );
+
+		// Supported features.
+		$this->supports = array(
+			'payment_status_request',
+			'webhook',
+			'webhook_log',
+			'webhook_no_config',
+		);
+	}
+
+	/**
+	 * Get issuers
+	 *
+	 * @see Core_Gateway::get_issuers()
+	 * @return array<int, array<string, array<string>>>
+	 */
+	public function get_issuers() {
+		/**
+		 * Get banklist.
+		 *
+		 * @link https://www.digiwallet.nl/en/documentation/ideal#banklist
+		 */
+		$url = \add_query_arg(
+			array(
+				'ver'    => '4',
+				'format' => 'xml',
+			),
+			'https://transaction.digiwallet.nl/ideal/getissuers'
+		);
+
+		/**
+		 * Request.
+		 */
+		$response = \Pronamic\WordPress\Http\Facades\Http::get( $url );
+
+		$simplexml = $response->simplexml();
+
+		$options = array();
+
+		foreach ( $simplexml->issuer as $issuer ) {
+			$key   = \strval( $issuer['id'] );
+			$value = \strval( $issuer );
+
+			$options[ $key ] = $value;
+		}
+
+		return array(
+			array(
+				'options' => $options,
+			),
+		);
 	}
 
 	/**

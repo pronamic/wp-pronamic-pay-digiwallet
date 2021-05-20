@@ -117,6 +117,17 @@ class ReportController {
 		}
 
 		/**
+		 * Webhook log payment.
+		 *
+		 * The `pronamic_pay_webhook_log_payment` action is triggered so the
+		 * `wp-pay/core` library can hook into this and register the webhook
+		 * call.
+		 *
+		 * @param Payment $payment Payment to log.
+		 */
+		\do_action( 'pronamic_pay_webhook_log_payment', $payment );
+
+		/**
 		 * Add note.
 		 */
 		$note = \sprintf(

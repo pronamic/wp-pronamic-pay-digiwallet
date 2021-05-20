@@ -46,7 +46,12 @@ class Integration extends AbstractGatewayIntegration {
 					'https://www.pronamic.eu/manuals/using-paypal-pronamic-pay/',
 					'pronamic_ideal'
 				),
-				'supports'      => array(),
+				'supports'      => array(
+					'payment_status_request',
+					'webhook',
+					'webhook_log',
+					'webhook_no_config',
+				),
 			)
 		);
 
