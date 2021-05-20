@@ -15,8 +15,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * Config test
  *
- * @link https://docs.adyen.com/developers/development-resources/live-endpoints
- *
  * @author  Remco Tolsma
  * @version 1.0.0
  * @since   1.0.0

@@ -105,7 +105,24 @@ class Gateway extends Core_Gateway {
 		}
 
 		$request->set_test( $this->config->is_test() );
-		$request->set_report_url( \rest_url( Integration::REST_ROUTE_NAMESPACE . '/report' ) );
+
+		/**
+		 * Report URL.
+		 */
+		$report_url = \rest_url( Integration::REST_ROUTE_NAMESPACE . '/report' );
+
+		/**
+		 * Filters the DigiWallet report URL.
+		 *
+		 * If you want to debug the DigiWallet report URL you can use this filter
+		 * to override the report URL. You could for example use a service like
+		 * https://webhook.site/ to inspect the report requests from DigiWallet.
+		 *
+		 * @param string $report_url DigiWallet report URL.
+		 */
+		$report_url = \apply_filters( 'pronamic_pay_digiwallet_report_url', $report_url );
+
+		$request->set_report_url( $report_url );
 
 		$response = \Pronamic\WordPress\Http\Facades\Http::post(
 			$url,
