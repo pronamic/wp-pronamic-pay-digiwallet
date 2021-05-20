@@ -145,6 +145,8 @@ class Gateway extends Core_Gateway {
 					$payment->get_return_url()
 				);
 
+				$request->set_bank( $payment->get_issuer() );
+
 				break;
 			default:
 				throw new \Exception(

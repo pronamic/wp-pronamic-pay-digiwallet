@@ -20,6 +20,18 @@ namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
  */
 class IDealStartRequest extends StartRequest {
 	/**
+	 * Bank code.
+	 *
+	 * Note that if this parameter is not provided, DigiWallet will present
+	 * the consumer with its own bank selection screen before sending the
+	 * consumer to their bank.
+	 *
+	 * @link https://www.digiwallet.nl/en/documentation/ideal#startapi
+	 * @var string|null
+	 */
+	private $bank;
+
+	/**
 	 * Construct start iDEAL request
 	 *
 	 * @param string $rtlo        RTLO.
@@ -29,5 +41,30 @@ class IDealStartRequest extends StartRequest {
 	 */
 	public function __construct( $rtlo, $amount, $description, $return_url ) {
 		parent::__construct( '4', $rtlo, $amount, $description, $return_url );
+	}
+
+	/**
+	 * Set bank.
+	 *
+	 * @param string|null $bank Bank code.
+	 * @return void
+	 */
+	public function set_bank( $bank ) {
+		$this->bank = $bank;
+	}
+
+	/**
+	 * Get parameters.
+	 *
+	 * @return array<string, string>
+	 */
+	public function get_parameters() {
+		$parameters = parent::get_parameters();
+
+		if ( null !== $this->bank ) {
+			$parameters['bank'] = $this->bank;
+		}
+
+		return $parameters;
 	}
 }
