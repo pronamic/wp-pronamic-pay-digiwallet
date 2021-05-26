@@ -10,6 +10,7 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
+use Pronamic\WordPress\Http\Facades\Http;
 use Pronamic\WordPress\Pay\Core\Gateway as Core_Gateway;
 use Pronamic\WordPress\Pay\Core\PaymentMethods;
 use Pronamic\WordPress\Pay\Payments\Payment;
@@ -24,7 +25,7 @@ use Pronamic\WordPress\Pay\Payments\PaymentStatus;
  */
 class Gateway extends Core_Gateway {
 	/**
-	 * Constructs and initializes an PayPal gateway.
+	 * Constructs and initializes an DigiWallet gateway.
 	 *
 	 * @param Config $config Config.
 	 */
@@ -65,7 +66,7 @@ class Gateway extends Core_Gateway {
 		/**
 		 * Request.
 		 */
-		$response = \Pronamic\WordPress\Http\Facades\Http::get( $url );
+		$response = Http::get( $url );
 
 		$simplexml = $response->simplexml();
 
@@ -113,7 +114,7 @@ class Gateway extends Core_Gateway {
 	 *
 	 * @param Payment $payment Payment.
 	 * @return void
-	 * @throws \Exception Throws eception on remote request issues.
+	 * @throws \Exception Throws exception on remote request issues.
 	 * @throws Error Throws error when DigiWallet returns an error.
 	 * @see Plugin::start()
 	 */
@@ -126,12 +127,25 @@ class Gateway extends Core_Gateway {
 			case PaymentMethods::BANCONTACT:
 				$url = 'https://transaction.digiwallet.nl/mrcash/start';
 
+				// User IP address.
+				$user_ip = '';
+
+				$customer = $payment->get_customer();
+
+				if ( null !== $customer ) {
+					$ip_address = $customer->get_ip_address();
+
+					if ( null !== $ip_address ) {
+						$user_ip = $ip_address;
+					}
+				}
+
 				$request = new BancontactStartRequest(
 					$this->config->get_rtlo(),
 					\strval( $payment->get_total_amount()->get_minor_units() ),
 					\strval( $payment->get_description() ),
 					$payment->get_return_url(),
-					'127.0.0.1'
+					$user_ip
 				);
 
 				break;
@@ -177,7 +191,7 @@ class Gateway extends Core_Gateway {
 
 		$request->set_report_url( $report_url );
 
-		$response = \Pronamic\WordPress\Http\Facades\Http::post(
+		$response = Http::post(
 			$url,
 			array(
 				'body' => $request->get_parameters(),
@@ -256,7 +270,7 @@ class Gateway extends Core_Gateway {
 			$transaction_id
 		);
 
-		$response = \Pronamic\WordPress\Http\Facades\Http::post(
+		$response = Http::post(
 			$url,
 			array(
 				'body' => $request->get_parameters(),
@@ -266,8 +280,6 @@ class Gateway extends Core_Gateway {
 		$body = $response->body();
 
 		$result_code = new ResultCode( \strval( \strtok( $body, ' ' ) ) );
-
-		$message = \strval( \strtok( '' ) );
 
 		switch ( $result_code ) {
 			case '000000':
@@ -315,6 +327,8 @@ class Gateway extends Core_Gateway {
 				break;
 			case 'DW_IE_0001':
 				// Unknown internal error.
+				$message = \strval( \strtok( '' ) );
+
 				throw new Error( $result_code, $message );
 		}
 	}

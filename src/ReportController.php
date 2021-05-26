@@ -132,7 +132,7 @@ class ReportController {
 		 */
 		$note = \sprintf(
 			/* translators: %s: payment provider name */
-			\__( 'Report URL requested by %s.', 'pronamic_ideal' ),
+			\__( 'Webhook requested by %s.', 'pronamic_ideal' ),
 			\__( 'DigiWallet', 'pronamic_ideal' )
 		);
 
