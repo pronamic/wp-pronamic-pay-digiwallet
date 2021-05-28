@@ -1,7 +1,7 @@
 {
   "name": "digiwallet",
   "version": "1.0.0",
-  "description": "DigiWallet driver for the WordPress payment processing library.",
+  "description": "DigiWallet (formerly TargetPay) driver for the WordPress payment processing library.",
   "repository": {
     "type": "git",
     "url": "https://github.com/wp-pay-gateways/digiwallet"
