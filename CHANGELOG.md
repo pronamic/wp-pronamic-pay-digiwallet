@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2021-05-20
+## [1.0.0] - 2021-05-28
 - First release.
 
 [Unreleased]: https://github.com/wp-pay-gateways/digiwallet/compare/1.0.0...HEAD
