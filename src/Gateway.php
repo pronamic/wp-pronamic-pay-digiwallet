@@ -209,7 +209,7 @@ class Gateway extends Core_Gateway {
 				'body' => $request->get_parameters(),
 			)
 		);
-var_dump( $response );exit;
+
 		$body = $response->body();
 
 		$result_code = new ResultCode( \strval( \strtok( $body, ' ' ) ) );
@@ -217,7 +217,7 @@ var_dump( $response );exit;
 		$message = \strval( \strtok( '' ) );
 
 		if ( $result_code->is_error() ) {
-			throw new Error( $result_code, $message );
+			throw new Error( $result_code, $body );
 		}
 
 		$start_response = new StartResponse(
