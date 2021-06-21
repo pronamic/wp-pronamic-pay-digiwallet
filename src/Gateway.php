@@ -96,6 +96,7 @@ class Gateway extends Core_Gateway {
 		return array(
 			PaymentMethods::BANCONTACT,
 			PaymentMethods::IDEAL,
+			PaymentMethods::PAYPAL,
 		);
 	}
 
@@ -162,6 +163,17 @@ class Gateway extends Core_Gateway {
 				$request->set_bank( $payment->get_issuer() );
 
 				break;
+			case PaymentMethods::PAYPAL:
+				$url = 'https://transaction.digiwallet.nl/paypal/start';
+
+				$request = new PayPalStartRequest(
+					$this->config->get_rtlo(),
+					\strval( $payment->get_total_amount()->get_minor_units() ),
+					\strval( $payment->get_description() ),
+					$payment->get_return_url()
+				);
+
+				break;
 			default:
 				throw new \Exception(
 					\sprintf(
@@ -197,7 +209,7 @@ class Gateway extends Core_Gateway {
 				'body' => $request->get_parameters(),
 			)
 		);
-
+var_dump( $response );exit;
 		$body = $response->body();
 
 		$result_code = new ResultCode( \strval( \strtok( $body, ' ' ) ) );
