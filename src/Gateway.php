@@ -214,17 +214,11 @@ class Gateway extends Core_Gateway {
 
 		$result_code = new ResultCode( \strval( \strtok( $body, ' ' ) ) );
 
-		$message = \strval( \strtok( '' ) );
-
 		if ( $result_code->is_error() ) {
 			throw new Error( $result_code, $body );
 		}
 
-		$start_response = new StartResponse(
-			$result_code,
-			\strval( \strtok( $message, '|' ) ),
-			\strval( \strtok( '' ) )
-		);
+		$start_response = StartResponse::from_response_body( $body );
 
 		$payment->set_transaction_id( $start_response->get_transaction_number() );
 		$payment->set_action_url( $start_response->get_bank_url() );

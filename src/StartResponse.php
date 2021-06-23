@@ -79,4 +79,25 @@ class StartResponse {
 	public function get_bank_url() {
 		return $this->bank_url;
 	}
+
+	/**
+	 * Parse a start response form response body string.
+	 * 
+	 * @param string $body Response body string
+	 * @return string
+	 */
+	public static function from_response_body( $body ) {
+		$space_position = \strpos( $body, ' ' );
+		$pipe_position  = \strpos( $body, '|' );
+
+		if ( false === $space_position || false === $pipe_position ) {
+			throw new \InvalidArgumentException( 'Response body is not according "resultaatcode transactienummer|bank-url" format.' );
+		}
+
+		$result_code        = \substr( $body, 0, $space_position );
+		$transaction_number = \substr( $body, $space_position + 1, $pipe_position - $space_position - 1 );
+		$bank_url           = \substr( $body, $pipe_position + 1 );
+
+		return new self( new ResultCode( $result_code ), $transaction_number, $bank_url );
+	}
 }
