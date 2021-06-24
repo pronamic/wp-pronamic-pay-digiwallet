@@ -262,6 +262,15 @@ class Gateway extends Core_Gateway {
 				$url = 'https://transaction.digiwallet.nl/ideal/check';
 
 				break;
+			/**
+			 * Payment method PayPal.
+			 *
+			 * @link https://www.digiwallet.nl/en/documentation/paypal#checkapi
+			 */
+			case PaymentMethods::PAYPAL:
+				$url = 'https://transaction.digiwallet.nl/paypal/check';
+
+				break;
 			default:
 				throw new \Exception(
 					\sprintf(
