@@ -24,7 +24,10 @@ class StartResponseTest extends TestCase {
 	 * Test start response.
 	 * 
 	 * @dataProvider data_provider
-	 * @param string $response_body Response body.
+	 * @param string $response_body      Response body.
+	 * @param string $result_code        Result code.
+	 * @param string $transaction_number Expected transaction number.
+	 * @param string $bank_url           Expected bank URL.
 	 */
 	public function test_start_response( $response_body, $result_code, $transaction_number, $bank_url ) {
 		$start_response = StartResponse::from_response_body( $response_body );
@@ -37,7 +40,7 @@ class StartResponseTest extends TestCase {
 	/**
 	 * Data provider.
 	 * 
-	 * @return array
+	 * @return array<array<int, string>>
 	 */
 	public function data_provider() {
 		return array(

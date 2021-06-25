@@ -26,7 +26,6 @@ class PayPalStartRequest extends StartRequest {
 	 * @param string $amount      Amount.
 	 * @param string $description Description.
 	 * @param string $return_url  Return URL.
-	 * @param string $user_ip     User IP.
 	 */
 	public function __construct( $rtlo, $amount, $description, $return_url ) {
 		parent::__construct( '1', $rtlo, $amount, $description, $return_url );
