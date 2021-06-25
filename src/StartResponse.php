@@ -91,7 +91,9 @@ class StartResponse {
 		$pipe_position  = \strpos( $body, '|' );
 
 		if ( false === $space_position || false === $pipe_position ) {
-			throw new \InvalidArgumentException( 'Response body is not according "resultaatcode transactienummer|bank-url" format.' );
+			throw new \InvalidArgumentException(
+				'Response body is not according "resultaatcode transactienummer|bank-url" format.' 
+			);
 		}
 
 		$result_code        = \substr( $body, 0, $space_position );

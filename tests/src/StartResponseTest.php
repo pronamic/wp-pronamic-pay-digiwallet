@@ -62,5 +62,5 @@ class StartResponseTest extends TestCase {
 				'https://pay.digiwallet.nl/test-transaction?transactionID=15443&paymethod=PYP&hash=b03eb29f3fe0a3735c52887253a1800e285835505a1058aaaf1c64ec84674c6e',
 			),
 		);
-    }
+	}
 }
