@@ -43,7 +43,7 @@
 		"php-coveralls/php-coveralls": "^2.4",
 		"phpmd/phpmd": "^2.9",
 		"phpunit/phpunit": "^5.7 || ^6.0",
-		"pronamic/wp-coding-standards": "dev-main",
+		"pronamic/wp-coding-standards": "^1.0",
 		"roots/wordpress": "^5.6",
 		"slevomat/coding-standard": "^6.4",
 		"wp-phpunit/wp-phpunit": "^5.6"
