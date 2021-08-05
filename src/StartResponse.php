@@ -84,7 +84,7 @@ class StartResponse {
 	 * Parse a start response form response body string.
 	 * 
 	 * @param string $body Response body string.
-	 * @return string
+	 * @return self
 	 * @throws \InvalidArgumentException Throws exception when repsonse is not according required format.
 	 */
 	public static function from_response_body( $body ) {
