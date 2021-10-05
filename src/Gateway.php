@@ -160,7 +160,7 @@ class Gateway extends Core_Gateway {
 					$payment->get_return_url()
 				);
 
-				$request->set_bank( $payment->get_issuer() );
+				$request->set_bank( $payment->get_meta( 'issuer' ) );
 
 				break;
 			case PaymentMethods::PAYPAL:
