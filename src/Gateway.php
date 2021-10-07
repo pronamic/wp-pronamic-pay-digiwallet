@@ -124,7 +124,7 @@ class Gateway extends Core_Gateway {
 			throw new \Exception( 'No DigiWallet configuration.' );
 		}
 
-		switch ( $payment->get_method() ) {
+		switch ( $payment->get_payment_method() ) {
 			case PaymentMethods::BANCONTACT:
 				$url = 'https://transaction.digiwallet.nl/mrcash/start';
 
@@ -178,7 +178,7 @@ class Gateway extends Core_Gateway {
 				throw new \Exception(
 					\sprintf(
 						'Unsupported payment method: %s.',
-						\strval( $payment->get_method() )
+						\strval( $payment->get_payment_method() )
 					)
 				);
 		}
@@ -243,7 +243,7 @@ class Gateway extends Core_Gateway {
 			throw new \Exception( 'No transaction ID.' );
 		}
 
-		switch ( $payment->get_method() ) {
+		switch ( $payment->get_payment_method() ) {
 			/**
 			 * Payment method Bancontact.
 			 *
@@ -275,7 +275,7 @@ class Gateway extends Core_Gateway {
 				throw new \Exception(
 					\sprintf(
 						'Unsupported payment method: %s.',
-						\strval( $payment->get_method() )
+						\strval( $payment->get_payment_method() )
 					)
 				);
 		}
