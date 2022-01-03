@@ -2,10 +2,10 @@
 /**
  * Gateway
  *
- * @author Pronamic <info@pronamic.eu>
- * @copyright 2005-2019 Pronamic
- * @license GPL-3.0-or-later
- * @package Pronamic\WordPress\Pay\Gateways\DigiWallet
+ * @author    Pronamic <info@pronamic.eu>
+ * @copyright 2005-2022 Pronamic
+ * @license   GPL-3.0-or-later
+ * @package   Pronamic\WordPress\Pay\Gateways\DigiWallet
  */
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
@@ -19,9 +19,9 @@ use Pronamic\WordPress\Pay\Payments\PaymentStatus;
 /**
  * Gateway
  *
- * @author Remco Tolsma
+ * @author  Remco Tolsma
  * @version 1.0.0
- * @since 1.0.0
+ * @since   1.0.0
  */
 class Gateway extends Core_Gateway {
 	/**
