@@ -2,10 +2,10 @@
 /**
  * Gateway
  *
- * @author Pronamic <info@pronamic.eu>
- * @copyright 2005-2019 Pronamic
- * @license GPL-3.0-or-later
- * @package Pronamic\WordPress\Pay\Gateways\DigiWallet
+ * @author    Pronamic <info@pronamic.eu>
+ * @copyright 2005-2022 Pronamic
+ * @license   GPL-3.0-or-later
+ * @package   Pronamic\WordPress\Pay\Gateways\DigiWallet
  */
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
@@ -19,9 +19,9 @@ use Pronamic\WordPress\Pay\Payments\PaymentStatus;
 /**
  * Gateway
  *
- * @author Remco Tolsma
+ * @author  Remco Tolsma
  * @version 1.0.0
- * @since 1.0.0
+ * @since   1.0.0
  */
 class Gateway extends Core_Gateway {
 	/**
@@ -124,7 +124,7 @@ class Gateway extends Core_Gateway {
 			throw new \Exception( 'No DigiWallet configuration.' );
 		}
 
-		switch ( $payment->get_method() ) {
+		switch ( $payment->get_payment_method() ) {
 			case PaymentMethods::BANCONTACT:
 				$url = 'https://transaction.digiwallet.nl/mrcash/start';
 
@@ -160,7 +160,7 @@ class Gateway extends Core_Gateway {
 					$payment->get_return_url()
 				);
 
-				$request->set_bank( $payment->get_issuer() );
+				$request->set_bank( $payment->get_meta( 'issuer' ) );
 
 				break;
 			case PaymentMethods::PAYPAL:
@@ -178,7 +178,7 @@ class Gateway extends Core_Gateway {
 				throw new \Exception(
 					\sprintf(
 						'Unsupported payment method: %s.',
-						\strval( $payment->get_method() )
+						\strval( $payment->get_payment_method() )
 					)
 				);
 		}
@@ -243,7 +243,7 @@ class Gateway extends Core_Gateway {
 			throw new \Exception( 'No transaction ID.' );
 		}
 
-		switch ( $payment->get_method() ) {
+		switch ( $payment->get_payment_method() ) {
 			/**
 			 * Payment method Bancontact.
 			 *
@@ -275,7 +275,7 @@ class Gateway extends Core_Gateway {
 				throw new \Exception(
 					\sprintf(
 						'Unsupported payment method: %s.',
-						\strval( $payment->get_method() )
+						\strval( $payment->get_payment_method() )
 					)
 				);
 		}

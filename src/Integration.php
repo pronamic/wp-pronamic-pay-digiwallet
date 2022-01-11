@@ -3,7 +3,7 @@
  * Integration
  *
  * @author    Pronamic <info@pronamic.eu>
- * @copyright 2005-2021 Pronamic
+ * @copyright 2005-2022 Pronamic
  * @license   GPL-3.0-or-later
  * @package   Pronamic\WordPress\Pay\Gateways\DigiWallet
  */
@@ -26,6 +26,13 @@ class Integration extends AbstractGatewayIntegration {
 	 * @var string
 	 */
 	const REST_ROUTE_NAMESPACE = 'pronamic-pay/digiwallet/v1';
+
+	/**
+	 * Meta key RTLO.
+	 * 
+	 * @param string
+	 */
+	private $meta_key_rtlo;
 
 	/**
 	 * Construct DigiWallet integration.
@@ -52,10 +59,13 @@ class Integration extends AbstractGatewayIntegration {
 					'webhook_log',
 					'webhook_no_config',
 				),
+				'meta_key_rtlo' => 'digiwallet_rtlo',
 			)
 		);
 
 		parent::__construct( $args );
+
+		$this->meta_key_rtlo = $args['meta_key_rtlo'];
 	}
 
 	/**
@@ -102,7 +112,7 @@ class Integration extends AbstractGatewayIntegration {
 		$fields[] = array(
 			'section'  => 'general',
 			'filter'   => \FILTER_SANITIZE_STRING,
-			'meta_key' => '_pronamic_gateway_digiwallet_rtlo',
+			'meta_key' => '_pronamic_gateway_' . $this->meta_key_rtlo,
 			'title'    => \_x( 'Shop ID (layoutcode)', 'digiwallet', 'pronamic_ideal' ),
 			'type'     => 'text',
 			'classes'  => array( 'regular-text', 'code' ),
@@ -119,7 +129,7 @@ class Integration extends AbstractGatewayIntegration {
 	 * @return Config
 	 */
 	public function get_config( $post_id ) {
-		$rtlo = $this->get_meta( $post_id, 'digiwallet_rtlo' );
+		$rtlo = $this->get_meta( $post_id, $this->meta_key_rtlo );
 
 		$config = new Config( $rtlo );
 
