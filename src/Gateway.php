@@ -25,14 +25,25 @@ use Pronamic\WordPress\Pay\Payments\PaymentStatus;
  */
 class Gateway extends Core_Gateway {
 	/**
+	 * Config.
+	 *
+	 * @var Config
+	 */
+	private $config;
+
+	/**
 	 * Constructs and initializes an DigiWallet gateway.
 	 *
 	 * @param Config $config Config.
 	 */
 	public function __construct( Config $config ) {
-		parent::__construct( $config );
+		parent::__construct();
+
+		$this->config = $config;
 
 		$this->set_method( self::METHOD_HTTP_REDIRECT );
+
+		$this->set_mode( $this->config->is_test() ? 'test' : 'live' );
 
 		// Supported features.
 		$this->supports = array(
@@ -120,10 +131,6 @@ class Gateway extends Core_Gateway {
 	 * @see Plugin::start()
 	 */
 	public function start( Payment $payment ) {
-		if ( ! $this->config instanceof Config ) {
-			throw new \Exception( 'No DigiWallet configuration.' );
-		}
-
 		switch ( $payment->get_payment_method() ) {
 			case PaymentMethods::BANCONTACT:
 				$url = 'https://transaction.digiwallet.nl/mrcash/start';
@@ -233,10 +240,6 @@ class Gateway extends Core_Gateway {
 	 * @throws Error Throws error on unknown internal error.
 	 */
 	public function update_status( Payment $payment ) {
-		if ( ! $this->config instanceof Config ) {
-			throw new \Exception( 'No DigiWallet configuration.' );
-		}
-
 		$transaction_id = $payment->get_transaction_id();
 
 		if ( null === $transaction_id ) {
