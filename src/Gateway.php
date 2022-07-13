@@ -12,7 +12,9 @@ namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
 use Pronamic\WordPress\Http\Facades\Http;
 use Pronamic\WordPress\Pay\Core\Gateway as Core_Gateway;
+use Pronamic\WordPress\Pay\Core\PaymentMethod;
 use Pronamic\WordPress\Pay\Core\PaymentMethods;
+use Pronamic\WordPress\Pay\Core\SelectField;
 use Pronamic\WordPress\Pay\Payments\Payment;
 use Pronamic\WordPress\Pay\Payments\PaymentStatus;
 
@@ -52,6 +54,20 @@ class Gateway extends Core_Gateway {
 			'webhook_log',
 			'webhook_no_config',
 		);
+
+		// Methods.
+		$ideal_payment_method = new PaymentMethod( PaymentMethods::IDEAL );
+
+		$ideal_issuer_field = new SelectField( 'ideal-issuer' );
+		$ideal_issuer_field->set_options_callback( function() {
+			return $this->get_issuers();
+		} );
+
+		$ideal_payment_method->add_field( $ideal_issuer_field );
+
+		$this->register_payment_method( new PaymentMethod( PaymentMethods::BANCONTACT ) );
+		$this->register_payment_method( $ideal_payment_method );
+		$this->register_payment_method( new PaymentMethod( PaymentMethods::PAYPAL ) );
 	}
 
 	/**
@@ -95,30 +111,6 @@ class Gateway extends Core_Gateway {
 				'options' => $options,
 			),
 		);
-	}
-
-	/**
-	 * Get supported payment methods
-	 *
-	 * @see Core_Gateway::get_supported_payment_methods()
-	 * @return array<string>
-	 */
-	public function get_supported_payment_methods() {
-		return array(
-			PaymentMethods::BANCONTACT,
-			PaymentMethods::IDEAL,
-			PaymentMethods::PAYPAL,
-		);
-	}
-
-	/**
-	 * Is payment method required to start transaction?
-	 *
-	 * @see Core_Gateway::payment_method_is_required()
-	 * @return true
-	 */
-	public function payment_method_is_required() {
-		return true;
 	}
 
 	/**
