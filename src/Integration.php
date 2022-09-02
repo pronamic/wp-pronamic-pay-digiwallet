@@ -116,6 +116,7 @@ class Integration extends AbstractGatewayIntegration {
 			'title'    => \_x( 'Shop ID (layoutcode)', 'digiwallet', 'pronamic_ideal' ),
 			'type'     => 'text',
 			'classes'  => array( 'regular-text', 'code' ),
+			'required' => true,
 		);
 
 		// Return fields.
