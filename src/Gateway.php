@@ -12,7 +12,11 @@ namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
 use Pronamic\WordPress\Http\Facades\Http;
 use Pronamic\WordPress\Pay\Core\Gateway as Core_Gateway;
+use Pronamic\WordPress\Pay\Core\PaymentMethod;
 use Pronamic\WordPress\Pay\Core\PaymentMethods;
+use Pronamic\WordPress\Pay\Fields\CachedCallbackOptions;
+use Pronamic\WordPress\Pay\Fields\IDealIssuerSelectField;
+use Pronamic\WordPress\Pay\Fields\SelectFieldOption;
 use Pronamic\WordPress\Pay\Payments\Payment;
 use Pronamic\WordPress\Pay\Payments\PaymentStatus;
 
@@ -46,31 +50,50 @@ class Gateway extends Core_Gateway {
 		$this->set_mode( $this->config->is_test() ? 'test' : 'live' );
 
 		// Supported features.
-		$this->supports = array(
+		$this->supports = [
 			'payment_status_request',
 			'webhook',
 			'webhook_log',
 			'webhook_no_config',
+		];
+
+		// Methods.
+		$ideal_payment_method = new PaymentMethod( PaymentMethods::IDEAL );
+
+		$ideal_issuer_field = new IDealIssuerSelectField( 'ideal-issuer' );
+
+		$ideal_issuer_field->set_options(
+			new CachedCallbackOptions(
+				function() {
+					return $this->get_ideal_issuers();
+				},
+				'pronamic_pay_ideal_issuers_' . \md5( \wp_json_encode( $config ) )
+			) 
 		);
+
+		$ideal_payment_method->add_field( $ideal_issuer_field );
+
+		$this->register_payment_method( new PaymentMethod( PaymentMethods::BANCONTACT ) );
+		$this->register_payment_method( $ideal_payment_method );
+		$this->register_payment_method( new PaymentMethod( PaymentMethods::PAYPAL ) );
 	}
 
 	/**
-	 * Get issuers
+	 * Get iDEAL issuers.
 	 *
-	 * @see Core_Gateway::get_issuers()
-	 * @return array<int, array<string, array<string>>>
+	 * @return iterable<SelectFieldOption|SelectFieldOptionGroup>
 	 */
-	public function get_issuers() {
+	private function get_ideal_issuers() {
 		/**
 		 * Get banklist.
 		 *
 		 * @link https://www.digiwallet.nl/en/documentation/ideal#banklist
 		 */
 		$url = \add_query_arg(
-			array(
+			[
 				'ver'    => '4',
 				'format' => 'xml',
-			),
+			],
 			'https://transaction.digiwallet.nl/ideal/getissuers'
 		);
 
@@ -81,44 +104,13 @@ class Gateway extends Core_Gateway {
 
 		$simplexml = $response->simplexml();
 
-		$options = array();
+		$options = [];
 
 		foreach ( $simplexml->issuer as $issuer ) {
-			$key   = \strval( $issuer['id'] );
-			$value = \strval( $issuer );
-
-			$options[ $key ] = $value;
+			$options[] = new SelectFieldOption( (string) $issuer['id'], (string) $issuer );
 		}
 
-		return array(
-			array(
-				'options' => $options,
-			),
-		);
-	}
-
-	/**
-	 * Get supported payment methods
-	 *
-	 * @see Core_Gateway::get_supported_payment_methods()
-	 * @return array<string>
-	 */
-	public function get_supported_payment_methods() {
-		return array(
-			PaymentMethods::BANCONTACT,
-			PaymentMethods::IDEAL,
-			PaymentMethods::PAYPAL,
-		);
-	}
-
-	/**
-	 * Is payment method required to start transaction?
-	 *
-	 * @see Core_Gateway::payment_method_is_required()
-	 * @return true
-	 */
-	public function payment_method_is_required() {
-		return true;
+		return $options;
 	}
 
 	/**
@@ -212,9 +204,9 @@ class Gateway extends Core_Gateway {
 
 		$response = Http::post(
 			$url,
-			array(
+			[
 				'body' => $request->get_parameters(),
-			)
+			]
 		);
 
 		$body = $response->body();
@@ -290,9 +282,9 @@ class Gateway extends Core_Gateway {
 
 		$response = Http::post(
 			$url,
-			array(
+			[
 				'body' => $request->get_parameters(),
-			)
+			]
 		);
 
 		$body = $response->body();

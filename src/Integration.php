@@ -39,10 +39,10 @@ class Integration extends AbstractGatewayIntegration {
 	 *
 	 * @param array<string, array<string>> $args Arguments.
 	 */
-	public function __construct( $args = array() ) {
+	public function __construct( $args = [] ) {
 		$args = \wp_parse_args(
 			$args,
-			array(
+			[
 				'id'            => 'digiwallet',
 				'name'          => 'DigiWallet',
 				'provider'      => 'digiwallet',
@@ -53,14 +53,14 @@ class Integration extends AbstractGatewayIntegration {
 					'https://www.pronamic.eu/manuals/using-digiwallet-pronamic-pay/',
 					'pronamic_ideal'
 				),
-				'supports'      => array(
+				'supports'      => [
 					'payment_status_request',
 					'webhook',
 					'webhook_log',
 					'webhook_no_config',
-				),
+				],
 				'meta_key_rtlo' => 'digiwallet_rtlo',
-			)
+			]
 		);
 
 		parent::__construct( $args );
@@ -74,7 +74,7 @@ class Integration extends AbstractGatewayIntegration {
 	public function setup() {
 		\add_filter(
 			'pronamic_gateway_configuration_display_value_' . $this->get_id(),
-			array( $this, 'gateway_configuration_display_value' ),
+			[ $this, 'gateway_configuration_display_value' ],
 			10,
 			2
 		);
@@ -106,17 +106,18 @@ class Integration extends AbstractGatewayIntegration {
 	 * @return array<int, array<string, callable|int|string|bool|array<int|string,int|string>>>
 	 */
 	public function get_settings_fields() {
-		$fields = array();
+		$fields = [];
 
 		// Business Id.
-		$fields[] = array(
+		$fields[] = [
 			'section'  => 'general',
 			'filter'   => \FILTER_SANITIZE_STRING,
 			'meta_key' => '_pronamic_gateway_' . $this->meta_key_rtlo,
 			'title'    => \_x( 'Shop ID (layoutcode)', 'digiwallet', 'pronamic_ideal' ),
 			'type'     => 'text',
-			'classes'  => array( 'regular-text', 'code' ),
-		);
+			'classes'  => [ 'regular-text', 'code' ],
+			'required' => true,
+		];
 
 		// Return fields.
 		return $fields;

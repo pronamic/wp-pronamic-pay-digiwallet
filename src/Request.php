@@ -66,7 +66,7 @@ abstract class Request {
 	 * @return array<string, string>
 	 */
 	public function get_parameters() {
-		$parameters = array();
+		$parameters = [];
 
 		if ( null !== $this->version ) {
 			$parameters['ver'] = $this->version;

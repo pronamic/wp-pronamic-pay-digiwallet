@@ -26,7 +26,7 @@ class ReportController {
 	 * @return void
 	 */
 	public function setup() {
-		\add_action( 'rest_api_init', array( $this, 'rest_api_init' ) );
+		\add_action( 'rest_api_init', [ $this, 'rest_api_init' ] );
 	}
 
 	/**
@@ -40,45 +40,45 @@ class ReportController {
 		\register_rest_route(
 			Integration::REST_ROUTE_NAMESPACE,
 			'/report',
-			array(
+			[
 				'methods'             => 'POST',
-				'callback'            => array( $this, 'rest_api_digiwallet_report' ),
+				'callback'            => [ $this, 'rest_api_digiwallet_report' ],
 				'permission_callback' => '__return_true',
-				'args'                => array(
-					'trxid'      => array(
+				'args'                => [
+					'trxid'      => [
 						'description' => \__( 'order number', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-					'amount'     => array(
+					],
+					'amount'     => [
 						'description' => \__( 'amount in eurocents', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-					'idealtrxid' => array(
+					],
+					'idealtrxid' => [
 						'description' => \__( 'iDEAL order number', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-					'rtlo'       => array(
+					],
+					'rtlo'       => [
 						'description' => \__( 'shop ID (layoutcode)', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-					'status'     => array(
+					],
+					'status'     => [
 						'description' => \__( 'status-code of the payment, see Check API', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-					'cname'      => array(
+					],
+					'cname'      => [
 						'description' => \__( 'customer\'s name, if payment was successful', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-					'cbank'      => array(
+					],
+					'cbank'      => [
 						'description' => \__( 'customer\'s IBAN number, if payment was successful', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-					'cbic'       => array(
+					],
+					'cbic'       => [
 						'description' => \__( 'customer\'s BIC number, if payment was successful', 'pronamic_ideal' ),
 						'type'        => 'string',
-					),
-				),
-			)
+					],
+				],
+			]
 		);
 	}
 
@@ -96,7 +96,7 @@ class ReportController {
 			return new \WP_Error(
 				'pronamic_pay_digiwallet_transaction_id_empty',
 				'Failed to process report request due to empty transaction ID.',
-				array( 'status' => 500 )
+				[ 'status' => 500 ]
 			);
 		}
 
@@ -112,7 +112,7 @@ class ReportController {
 					'Could not find payment with transaction ID: %s.',
 					$transaction_id
 				),
-				array( 'status' => 500 )
+				[ 'status' => 500 ]
 			);
 		}
 
@@ -156,9 +156,9 @@ class ReportController {
 		 */
 		$rtlo = $request->get_param( 'rtlo' );
 
-		return (object) array(
+		return (object) [
 			'transaction_id' => $transaction_id,
 			'rtlo'           => $rtlo,
-		);
+		];
 	}
 }

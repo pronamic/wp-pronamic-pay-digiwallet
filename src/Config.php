@@ -10,6 +10,7 @@
 
 namespace Pronamic\WordPress\Pay\Gateways\DigiWallet;
 
+use JsonSerializable;
 use Pronamic\WordPress\Pay\Core\GatewayConfig;
 
 /**
@@ -19,7 +20,7 @@ use Pronamic\WordPress\Pay\Core\GatewayConfig;
  * @version 1.0.0
  * @since   1.0.0
  */
-class Config extends GatewayConfig implements \JsonSerializable {
+class Config extends GatewayConfig implements JsonSerializable {
 	/**
 	 * RTLO.
 	 *
@@ -78,9 +79,9 @@ class Config extends GatewayConfig implements \JsonSerializable {
 	 * @return object
 	 */
 	public function jsonSerialize() {
-		return (object) array(
+		return (object) [
 			'rtlo' => $this->rtlo,
 			'test' => $this->test,
-		);
+		];
 	}
 }
