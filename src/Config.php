@@ -79,9 +79,9 @@ class Config extends GatewayConfig implements JsonSerializable {
 	 * @return object
 	 */
 	public function jsonSerialize() {
-		return (object) array(
+		return (object) [
 			'rtlo' => $this->rtlo,
 			'test' => $this->test,
-		);
+		];
 	}
 }

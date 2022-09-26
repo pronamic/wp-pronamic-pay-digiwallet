@@ -43,27 +43,27 @@ class StartResponseTest extends TestCase {
 	 * @return array<array<int, string>>
 	 */
 	public function data_provider() {
-		return array(
+		return [
 			/**
 			 * PayPal start response.
 			 * 
 			 * @link https://www.digiwallet.nl/nl/documentation/paymethods/paypal
 			 */
-			array(
+			[
 				'000000 PAY-XXXXXXXXXXXXXXXXXXXXXXXX|https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-XYXYXYXYXYXYXYXYX',
 				'000000',
 				'PAY-XXXXXXXXXXXXXXXXXXXXXXXX',
 				'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-XYXYXYXYXYXYXYXYX',
-			),
+			],
 			/**
 			 * Unfortunately the DigiWallet document is not correct, when testing PayPal we get the following response:
 			 */
-			array(
+			[
 				'000000 |https://pay.digiwallet.nl/test-transaction?transactionID=15443&paymethod=PYP&hash=b03eb29f3fe0a3735c52887253a1800e285835505a1058aaaf1c64ec84674c6e',
 				'000000',
 				'',
 				'https://pay.digiwallet.nl/test-transaction?transactionID=15443&paymethod=PYP&hash=b03eb29f3fe0a3735c52887253a1800e285835505a1058aaaf1c64ec84674c6e',
-			),
-		);
+			],
+		];
 	}
 }

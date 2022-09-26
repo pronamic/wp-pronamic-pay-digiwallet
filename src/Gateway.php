@@ -50,12 +50,12 @@ class Gateway extends Core_Gateway {
 		$this->set_mode( $this->config->is_test() ? 'test' : 'live' );
 
 		// Supported features.
-		$this->supports = array(
+		$this->supports = [
 			'payment_status_request',
 			'webhook',
 			'webhook_log',
 			'webhook_no_config',
-		);
+		];
 
 		// Methods.
 		$ideal_payment_method = new PaymentMethod( PaymentMethods::IDEAL );
@@ -90,10 +90,10 @@ class Gateway extends Core_Gateway {
 		 * @link https://www.digiwallet.nl/en/documentation/ideal#banklist
 		 */
 		$url = \add_query_arg(
-			array(
+			[
 				'ver'    => '4',
 				'format' => 'xml',
-			),
+			],
 			'https://transaction.digiwallet.nl/ideal/getissuers'
 		);
 
@@ -104,7 +104,7 @@ class Gateway extends Core_Gateway {
 
 		$simplexml = $response->simplexml();
 
-		$options = array();
+		$options = [];
 
 		foreach ( $simplexml->issuer as $issuer ) {
 			$options[] = new SelectFieldOption( (string) $issuer['id'], (string) $issuer );
@@ -204,9 +204,9 @@ class Gateway extends Core_Gateway {
 
 		$response = Http::post(
 			$url,
-			array(
+			[
 				'body' => $request->get_parameters(),
-			)
+			]
 		);
 
 		$body = $response->body();
@@ -282,9 +282,9 @@ class Gateway extends Core_Gateway {
 
 		$response = Http::post(
 			$url,
-			array(
+			[
 				'body' => $request->get_parameters(),
-			)
+			]
 		);
 
 		$body = $response->body();
