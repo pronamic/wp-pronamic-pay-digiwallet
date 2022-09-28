@@ -37,6 +37,7 @@
     "eslint-plugin-json": "^2.1.2"
   },
   "scripts": {
-    "eslint": "eslint . --ext .json --ext .js"
+    "eslint": "eslint . --ext .json --ext .js",
+    "version": "vendor/bin/pronamic-wp-file-header set Version $( npm pkg get version | xargs echo ) pronamic-pay-digiwallet.php"
   }
 }
