@@ -50,7 +50,7 @@ class Integration extends AbstractGatewayIntegration {
 				'product_url'   => \__( 'https://www.digiwallet.nl/', 'pronamic_ideal' ),
 				'dashboard_url' => 'https://www.digiwallet.nl/nl/user/dashboard',
 				'manual_url'    => \__(
-					'https://www.pronamic.eu/manuals/using-digiwallet-pronamic-pay/',
+					'https://www.pronamicpay.com/en/manuals/how-to-connect-digiwallet-to-wordpress-with-pronamic-pay/',
 					'pronamic_ideal'
 				),
 				'supports'      => [
