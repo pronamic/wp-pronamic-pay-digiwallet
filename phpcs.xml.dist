@@ -7,7 +7,8 @@
 	<exclude-pattern>tests/wp-config.php</exclude-pattern>
 
 	<rule ref="PronamicWP">
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+		<exclude name="WordPress.DB.SlowDBQuery.slow_db_query_meta_key" />
+		<exclude name="WordPress.DB.SlowDBQuery.slow_db_query_meta_query" />
 	</rule>
 
 	<rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
@@ -58,6 +59,7 @@
 		<exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint" />
 		<exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint" />
 		<exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint" />
+		<exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.UselessAnnotation" />
 		<exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint" />
 		<exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint" />
 		<exclude name="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint.UselessVarAnnotation" />
@@ -65,10 +67,5 @@
 		<exclude name="SlevomatCodingStandard.Variables.UselessVariable.UselessVariable" />
 
 		<exclude name="SlevomatCodingStandard.Whitespaces.DuplicateSpaces.DuplicateSpaces" />
-	</rule>
-
-	<rule ref="WordPress">
-		<exclude name="WordPress.DB.SlowDBQuery.slow_db_query_meta_key" />
-		<exclude name="WordPress.DB.SlowDBQuery.slow_db_query_meta_query" />
 	</rule>
 </ruleset>
