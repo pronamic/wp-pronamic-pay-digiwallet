@@ -29,7 +29,7 @@ class Integration extends AbstractGatewayIntegration {
 
 	/**
 	 * Meta key RTLO.
-	 * 
+	 *
 	 * @var string
 	 */
 	private $meta_key_rtlo;

@@ -82,7 +82,7 @@ class StartResponse {
 
 	/**
 	 * Parse a start response form response body string.
-	 * 
+	 *
 	 * @param string $body Response body string.
 	 * @return self
 	 * @throws \InvalidArgumentException Throws exception when repsonse is not according required format.
@@ -93,7 +93,7 @@ class StartResponse {
 
 		if ( false === $space_position || false === $pipe_position ) {
 			throw new \InvalidArgumentException(
-				'Response body is not according "resultaatcode transactienummer|bank-url" format.' 
+				'Response body is not according "resultaatcode transactienummer|bank-url" format.'
 			);
 		}
 

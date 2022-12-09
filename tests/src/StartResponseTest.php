@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 class StartResponseTest extends TestCase {
 	/**
 	 * Test start response.
-	 * 
+	 *
 	 * @dataProvider data_provider
 	 * @param string $response_body      Response body.
 	 * @param string $result_code        Result code.
@@ -39,14 +39,14 @@ class StartResponseTest extends TestCase {
 
 	/**
 	 * Data provider.
-	 * 
+	 *
 	 * @return array<array<int, string>>
 	 */
 	public function data_provider() {
 		return [
 			/**
 			 * PayPal start response.
-			 * 
+			 *
 			 * @link https://www.digiwallet.nl/nl/documentation/paymethods/paypal
 			 */
 			[

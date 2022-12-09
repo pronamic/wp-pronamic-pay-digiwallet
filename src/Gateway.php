@@ -68,7 +68,7 @@ class Gateway extends Core_Gateway {
 					return $this->get_ideal_issuers();
 				},
 				'pronamic_pay_ideal_issuers_' . \md5( \wp_json_encode( $config ) )
-			) 
+			)
 		);
 
 		$ideal_payment_method->add_field( $ideal_issuer_field );
