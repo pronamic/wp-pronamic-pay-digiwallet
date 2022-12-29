@@ -52,6 +52,7 @@
 		"pronamic/wp-deployer": "^1.2",
 		"pronamic/wp-file-header": "dev-main",
 		"roots/wordpress": "^6.0",
+		"slevomat/coding-standard": "^6.4",
 		"wp-phpunit/wp-phpunit": "^6.1",
 		"yoast/phpunit-polyfills": "^1.0"
 	},
