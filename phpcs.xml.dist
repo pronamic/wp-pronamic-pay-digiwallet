@@ -44,6 +44,7 @@
 
 		<exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation.NonFullyQualifiedClassName" />
 		<exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName" />
+		<exclude name="SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse" />
 		<exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces.NonFullyQualified" />
 
 		<exclude name="SlevomatCodingStandard.Numbers.RequireNumericLiteralSeparator.RequiredNumericLiteralSeparator" />
