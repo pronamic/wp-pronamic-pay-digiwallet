@@ -36,6 +36,13 @@ class Config extends GatewayConfig implements JsonSerializable {
 	private $test = false;
 
 	/**
+	 * Mode.
+	 *
+	 * @var string
+	 */
+	public $mode;
+
+	/**
 	 * Construct config object.
 	 *
 	 * @param string $rtlo RTLO.

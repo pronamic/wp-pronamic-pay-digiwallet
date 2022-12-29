@@ -17,6 +17,7 @@ use Pronamic\WordPress\Pay\Core\PaymentMethods;
 use Pronamic\WordPress\Pay\Fields\CachedCallbackOptions;
 use Pronamic\WordPress\Pay\Fields\IDealIssuerSelectField;
 use Pronamic\WordPress\Pay\Fields\SelectFieldOption;
+use Pronamic\WordPress\Pay\Fields\SelectFieldOptionGroup;
 use Pronamic\WordPress\Pay\Payments\Payment;
 use Pronamic\WordPress\Pay\Payments\PaymentStatus;
 
@@ -67,7 +68,7 @@ class Gateway extends Core_Gateway {
 				function() {
 					return $this->get_ideal_issuers();
 				},
-				'pronamic_pay_ideal_issuers_' . \md5( \wp_json_encode( $config ) )
+				'pronamic_pay_ideal_issuers_' . \md5( (string) \wp_json_encode( $config ) )
 			)
 		);
 
