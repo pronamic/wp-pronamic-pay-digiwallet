@@ -1,6 +1,6 @@
 {
   "name": "digiwallet",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "DigiWallet (formerly TargetPay) driver for the WordPress payment processing library.",
   "repository": {
     "type": "git",

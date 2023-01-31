@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.1] - 2023-01-31
+### Composer
+
+- Changed `php` from `>=8.0` to `>=7.4`.
+Full set of changes: [`3.3.0...3.3.1`][3.3.1]
+
+[3.3.1]: https://github.com/pronamic/wp-pronamic-pay-digiwallet/compare/v3.3.0...v3.3.1
+
 ## [3.3.0] - 2022-12-29
 
 ### Commits
