@@ -3,7 +3,7 @@
 	"description": "DigiWallet (formerly TargetPay) driver for the WordPress payment processing library.",
 	"keywords": ["wordpress", "wp", "pay", "digiwallet", "targetpay", "gateway", "pronamic"],
 	"homepage": "http://www.wp-pay.org/gateways/digiwallet/",
-	"license": "GPL-3.0-or-later" ,
+	"license": "GPL-3.0-or-later",
 	"type": "wordpress-plugin",
 	"authors": [
 		{
