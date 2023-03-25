@@ -4,6 +4,7 @@
 	"keywords": ["wordpress", "wp", "pay", "digiwallet", "targetpay", "gateway", "pronamic"],
 	"homepage": "http://www.wp-pay.org/gateways/digiwallet/",
 	"license": "GPL-3.0-or-later" ,
+	"type": "wordpress-plugin",
 	"authors": [
 		{
 			"name": "Pronamic",
