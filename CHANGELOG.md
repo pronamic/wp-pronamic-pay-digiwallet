@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.2] - 2023-03-27
+
+### Commits
+
+- Set Composer type to `wordpress-plugin`. ([e4ee9ce](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/e4ee9cee352da8b7d55d5c97f2ab02637b4a54ad))
+- Updated .gitattributes ([8468b1f](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/8468b1f16a58b4b88e9d76cec57aa8fe8ffcdc7b))
+- Requires PHP: 7.4. ([2681e67](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/2681e678da78770f847e12b365fd82870e226904))
+
+Full set of changes: [`3.3.1...3.3.2`][3.3.2]
+
+[3.3.2]: https://github.com/pronamic/wp-pronamic-pay-digiwallet/compare/v3.3.1...v3.3.2
+
 ## [3.3.1] - 2023-01-31
 ### Composer
 
