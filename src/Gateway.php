@@ -229,7 +229,7 @@ class Gateway extends Core_Gateway {
 	 *
 	 * @param Payment $payment Payment.
 	 * @return void
-	 * @throws \Exception Throws eception on remote request issues.
+	 * @throws \Exception Throws exception on remote request issues.
 	 * @throws Error Throws error on unknown internal error.
 	 */
 	public function update_status( Payment $payment ) {
