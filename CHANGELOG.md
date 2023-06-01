@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.3] - 2023-06-01
+
+### Commits
+
+- Switch from `pronamic/wp-deployer` to `pronamic/pronamic-cli`. ([bffd1d1](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/bffd1d126a881ab924049f2928f1a0378be0f660))
+- Fixed typo. ([62bc234](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/62bc2349597ee98a337b0188a52cad9fa146f2b6))
+- Updated .gitattributes ([87839a7](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/87839a756cf138b5dff0866128b2c90d17e6a432))
+
+Full set of changes: [`3.3.2...3.3.3`][3.3.3]
+
+[3.3.3]: https://github.com/pronamic/wp-pronamic-pay-digiwallet/compare/v3.3.2...v3.3.3
+
 ## [3.3.2] - 2023-03-27
 
 ### Commits
