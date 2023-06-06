@@ -36,7 +36,8 @@
 			"dealerdirect/phpcodesniffer-composer-installer": true,
 			"roots/wordpress-core-installer": true,
 			"bamarni/composer-bin-plugin": true
-		}
+		},
+		"wp-slug": "pronamic-pay-digiwallet"
 	},
 	"require": {
 		"php": ">=7.4",
@@ -53,6 +54,7 @@
 		"pronamic/wp-coding-standards": "^1.3",
 		"roots/wordpress": "^6.0",
 		"slevomat/coding-standard": "^6.4",
+		"wp-cli/wp-cli-bundle": "^2.6",
 		"wp-phpunit/wp-phpunit": "^6.1",
 		"yoast/phpunit-polyfills": "^1.0"
 	},
