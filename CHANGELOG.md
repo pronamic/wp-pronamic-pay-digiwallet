@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.4] - 2023-07-12
+
+### Commits
+
+- Updated composer.json ([f61887a](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/f61887ad57b0d432a02dbe2212c16a99d19882c9))
+- Created .pronamic-build-ignore ([70b8113](https://github.com/pronamic/wp-pronamic-pay-digiwallet/commit/70b81132cccae32be9a0a76123f29281f362664e))
+
+Full set of changes: [`3.3.3...3.3.4`][3.3.4]
+
+[3.3.4]: https://github.com/pronamic/wp-pronamic-pay-digiwallet/compare/v3.3.3...v3.3.4
+
 ## [3.3.3] - 2023-06-01
 
 ### Commits
