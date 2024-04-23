@@ -1,11 +1,11 @@
+> [!WARNING]  
+> On February 29, 2024, CEO Paul H.J. van Rooij announced that the payment services TargetMedia-TargetPay-DigiWallet will be terminated as of April 29, 2024.
+
 <p align="center">
 	<a href="https://www.wp-pay.org/">
 		<img src="https://www.wp-pay.org/assets/pronamic-pay.svgo-min.svg" alt="WordPress Pay » Gateway » DigiWallet" width="72" height="72">
 	</a>
 </p>
-
-> [!WARNING]  
-> On February 29, 2024, CEO Paul H.J. van Rooij announced that the payment services TargetMedia-TargetPay-DigiWallet will be terminated as of April 29, 2024.
 
 <h1 align="center">WordPress Pay » Gateway » DigiWallet</h3>
 
