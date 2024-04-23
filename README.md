@@ -1,6 +1,6 @@
 > [!WARNING]  
 > On February 29, 2024, CEO Paul H.J. van Rooij announced that the payment services TargetMedia-TargetPay-DigiWallet will be terminated as of April 29, 2024.
-> https://github.com/pronamic/wp-pronamic-pay-digiwallet/blob/main/DEPRECATED.md
+> See the [`DEPRECATED.md`](https://github.com/pronamic/wp-pronamic-pay-digiwallet/blob/main/DEPRECATED.md) file for more information.
 
 <p align="center">
 	<a href="https://www.wp-pay.org/">
